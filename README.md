@@ -1,4 +1,4 @@
-# 🌦️ Laravel Weather Data API
+# 🌦️ Weather Data API
 
 This Laravel application integrates with the [OpenWeather API](https://openweathermap.org/api) to fetch, store, and retrieve weather information for a given city. This application performs following tasks: 
 
