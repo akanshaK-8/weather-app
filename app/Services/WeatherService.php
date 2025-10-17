@@ -13,7 +13,7 @@ class WeatherService {
         $city = $request->query('city');
         $startDate = $request->query('start_date');
         $endDate = $request->query('end_date');
-        $perPage = request()->get('per_page', 10);
+        $perPage = request()->get('per_page', 2);
         
         $columns = [
             'city',

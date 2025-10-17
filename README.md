@@ -1,66 +1,250 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🌦️ Laravel Weather Data API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This Laravel application integrates with the [OpenWeather API](https://openweathermap.org/api) to fetch, store, and retrieve weather information for a given city. This application performs following tasks: 
 
-## About Laravel
+- Fetch data from open weather api based on city name and store data in MySQL db.
+- Filter data from db based on city name or date range.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🧰 Tech Stack
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **IDE:** VS Code
+- **Framework:** Laravel 10x  
+- **Language:** PHP 8.1  
+- **Database:** MySQL  
+- **Local web server environment:** Xampp, Apache
+- **HTTP Client:** Laravel `Http` Facade  
+- **External API:** [OpenWeather Current Weather Data API](https://openweathermap.org/current)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## ⚙️ Features
 
-## Laravel Sponsors
+✅ Fetch real-time weather data for any city and store in DB\
+✅ Prevent duplicate records using `(city_id, weather_date)`  
+✅ Retrieve stored data with filters (city or date range)  
+✅ Handle API and DB errors gracefully  
+✅ Follow standard coding practices
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+---
 
-### Premium Partners
+## 🧱 Project Setup
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+### 1️⃣ Clone the Repository in VS Code
 
-## Contributing
+ Run in terminal:
+- `git clone https://github.com/akanshaK-8/weather-app.git`
+- `cd weather-app`
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 2️⃣ Install Dependecies
 
-## Code of Conduct
+- run command `composer install`
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 3️⃣ Generate application key
 
-## Security Vulnerabilities
+- `php artisan key:generate`
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 🧱 Database Setup
 
-## License
+This project includes a pre-built MySQL database dump (`weather_app.sql`) in the `database/` folder.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 1️⃣ Import Database
+1. Open XAMPP and start **Apache** and **MySQL**.
+2. Open **phpMyAdmin** at `http://localhost/phpmyadmin`.
+3. Create a new database named `weather_app`.
+4. Click **Import** → choose `database/weather_app.sql` → click **Go**.
+
+### 2️⃣ Configure `.env`
+- Copy `.env.example` to `.env` and update DB credentials if needed.
+- example:
+```DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=weather_app
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+## 🧱 Configure OpenWeather API Key 
+
+### 1️⃣ Sign Up / Get API Key
+- Go to https://openweathermap.org/api and sign up or log in to your account.
+- Navigate to the API keys section and generate a new API key.
+- Add your API key like this in .env file : `OPEN_WEATHER_API_KEY=your_openweather_api_key_here`
+
+## 2️⃣ How to Run
+- Start the local server: `php artisan serve`
+- App will be running at localhost
+
+## Sample Curl
+
+### 1️⃣ Getting weather data based on city name from OpenWeather Api.
+`curl --location 'http://127.0.0.1:8000/api/weather-data/fetch?city=london'`\
+response: 
+```
+{
+    "code": 200,
+    "message": "Data saved in DB"
+}
+
+```
+
+### 2️⃣ Fetch weather data from db based on:
+- city name: `curl --location 'http://127.0.0.1:8000/api/weather-data?city=london'`\
+response:
+```
+{
+    "code": 200,
+    "data": {
+        "current_page": 1,
+        "data": [
+            {
+                "city": "London",
+                "date": "2025-10-17",
+                "temperature": "13.84",
+                "min_temperature": "12.95",
+                "max_temperature": "14.44",
+                "humidity": 80,
+                "pressure": 1026,
+                "sunrise": "11:56:03",
+                "sunset": "22:35:42",
+                "wind": "4.12",
+                "weather": "Clouds"
+            },
+            {
+                "city": "London",
+                "date": "2025-10-18",
+                "temperature": "12.95",
+                "min_temperature": "12.25",
+                "max_temperature": "13.33",
+                "humidity": 72,
+                "pressure": 1026,
+                "sunrise": "11:57:46",
+                "sunset": "22:33:34",
+                "wind": "3.60",
+                "weather": "Clouds"
+            }
+        ],
+        "first_page_url": "http://127.0.0.1:8000/api/weather-data?page=1",
+        "from": 1,
+        "last_page": 1,
+        "last_page_url": "http://127.0.0.1:8000/api/weather-data?page=1",
+        "links": [
+            {
+                "url": null,
+                "label": "&laquo; Previous",
+                "active": false
+            },
+            {
+                "url": "http://127.0.0.1:8000/api/weather-data?page=1",
+                "label": "1",
+                "active": true
+            },
+            {
+                "url": null,
+                "label": "Next &raquo;",
+                "active": false
+            }
+        ],
+        "next_page_url": null,
+        "path": "http://127.0.0.1:8000/api/weather-data",
+        "per_page": 10,
+        "prev_page_url": null,
+        "to": 2,
+        "total": 2
+    }
+}
+```
+- date range: `curl --location 'http://127.0.0.1:8000/api/weather-data?start_date=2025-10-15&end_date=2025-10-17'`
+response: 
+```
+{
+    "code": 200,
+    "data": {
+        "current_page": 2,
+        "data": [
+            {
+                "city": "London",
+                "date": "2025-10-17",
+                "temperature": "13.84",
+                "min_temperature": "12.95",
+                "max_temperature": "14.44",
+                "humidity": 80,
+                "pressure": 1026,
+                "sunrise": "11:56:03",
+                "sunset": "22:35:42",
+                "wind": "4.12",
+                "weather": "Clouds"
+            },
+            {
+                "city": "Arkansas",
+                "date": "2025-10-17",
+                "temperature": "27.87",
+                "min_temperature": "26.40",
+                "max_temperature": "29.49",
+                "humidity": 48,
+                "pressure": 1014,
+                "sunrise": "17:46:33",
+                "sunset": "05:04:05",
+                "wind": "0.89",
+                "weather": "Clear"
+            }
+        ],
+        "first_page_url": "http://127.0.0.1:8000/api/weather-data?page=1",
+        "from": 3,
+        "last_page": 6,
+        "last_page_url": "http://127.0.0.1:8000/api/weather-data?page=6",
+        "links": [
+            {
+                "url": "http://127.0.0.1:8000/api/weather-data?page=1",
+                "label": "&laquo; Previous",
+                "active": false
+            },
+            {
+                "url": "http://127.0.0.1:8000/api/weather-data?page=1",
+                "label": "1",
+                "active": false
+            },
+            {
+                "url": "http://127.0.0.1:8000/api/weather-data?page=2",
+                "label": "2",
+                "active": true
+            },
+            {
+                "url": "http://127.0.0.1:8000/api/weather-data?page=3",
+                "label": "3",
+                "active": false
+            },
+            {
+                "url": "http://127.0.0.1:8000/api/weather-data?page=4",
+                "label": "4",
+                "active": false
+            },
+            {
+                "url": "http://127.0.0.1:8000/api/weather-data?page=5",
+                "label": "5",
+                "active": false
+            },
+            {
+                "url": "http://127.0.0.1:8000/api/weather-data?page=6",
+                "label": "6",
+                "active": false
+            },
+            {
+                "url": "http://127.0.0.1:8000/api/weather-data?page=3",
+                "label": "Next &raquo;",
+                "active": false
+            }
+        ],
+        "next_page_url": "http://127.0.0.1:8000/api/weather-data?page=3",
+        "path": "http://127.0.0.1:8000/api/weather-data",
+        "per_page": 2,
+        "prev_page_url": "http://127.0.0.1:8000/api/weather-data?page=1",
+        "to": 4,
+        "total": 11
+    }
+}
+```
